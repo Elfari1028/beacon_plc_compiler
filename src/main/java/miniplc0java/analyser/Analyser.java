@@ -237,7 +237,7 @@ public final class Analyser {
             // 这里把常量值直接放进栈里，位置和符号表记录的一样。
             // 更高级的程序还可以把常量的值记录下来，遇到相应的变量直接替换成这个常数值，
             // 我们这里就先不这么干了。
-            instructions.add(new Instruction(Operation.LIT, value));
+//            instructions.add(new Instruction(Operation.LIT, value));
         }
     }
 
@@ -301,8 +301,8 @@ public final class Analyser {
             else {
                 // 都不是，摸了
 //                TODO : do i need the error?
-                throw new ExpectedTokenError(List.of(TokenType.Ident, TokenType.Uint, TokenType.LParen), next());
-//                break;
+//                throw new ExpectedTokenError(List.of(TokenType.Ident, TokenType.Uint, TokenType.LParen), next());
+                break;
             }
         }
 //        throw new Error("Not implemented");
