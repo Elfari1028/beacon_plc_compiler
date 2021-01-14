@@ -395,12 +395,12 @@ public final class Analyser {
 
         while (true) {
             // 预读可能是运算符的 token
-            Token op = next();
+            Token op = peek();
             if(op.getTokenType()!=TokenType.Mult && op.getTokenType()!=TokenType.Div){
                 break;
             }
             // 运算符
-
+            next();
             // 因子
             analyseFactor();
             // 生成代码
@@ -461,6 +461,6 @@ public final class Analyser {
         if (negate) {
             instructions.add(new Instruction(Operation.SUB));
         }
-        throw new Error("Not implemented");
+//        throw new Error("Not implemented");
     }
 }
