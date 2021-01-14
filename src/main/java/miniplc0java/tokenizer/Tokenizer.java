@@ -69,7 +69,7 @@ public class Tokenizer {
         // Token 的 Value 应填写标识符或关键字的字符串
         StringBuilder str = new StringBuilder();
         Pos startPos=it.currentPos();
-        while(Character.isDigit(it.peekChar())||Character.isAlphabetic(it.peekChar())){
+        if(Character.isJavaIdentifierStart(it.peekChar()))while(Character.isJavaIdentifierPart(it.peekChar())){
             str.append(it.nextChar());
         }
         switch (str.toString()){
