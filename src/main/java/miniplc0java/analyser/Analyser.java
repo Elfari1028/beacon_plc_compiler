@@ -263,8 +263,6 @@ public final class Analyser {
             }
             // 分析初始化的表达式
 
-            // 分号
-            expect(TokenType.Semicolon);
 
             // 加入符号表，请填写名字和当前位置（报错用）
             String name = /* 名字 */ nameToken.getValueString();
@@ -276,6 +274,9 @@ public final class Analyser {
             }else {
                 analyseExpression();
             }
+
+            // 分号
+            expect(TokenType.Semicolon);
         }
     }
 
