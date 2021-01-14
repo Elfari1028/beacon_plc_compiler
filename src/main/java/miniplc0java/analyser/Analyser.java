@@ -301,8 +301,8 @@ public final class Analyser {
             else {
                 // 都不是，摸了
 //                TODO : do i need the error?
-//                throw new ExpectedTokenError(List.of(TokenType.Ident, TokenType.Print, TokenType.Semicolon), next());
-                break;
+                throw new ExpectedTokenError(List.of(TokenType.Ident, TokenType.Uint, TokenType.LParen), next());
+//                break;
             }
         }
 //        throw new Error("Not implemented");
