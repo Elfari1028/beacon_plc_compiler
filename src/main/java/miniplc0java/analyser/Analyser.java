@@ -390,7 +390,7 @@ public final class Analyser {
 
     private void analyseItem() throws CompileError {
         // 项 -> 因子 (乘法运算符 因子)*
-
+        analyseFactor();
         // 因子
 
         while (true) {
