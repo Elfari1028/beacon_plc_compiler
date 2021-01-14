@@ -354,7 +354,6 @@ public final class Analyser {
 
         // 分析这个语句
         var nameToken=expect(TokenType.Ident);
-        expect(TokenType.Equal);
         // 标识符是什么？
         String name = nameToken.getValueString();
         var symbol = symbolTable.get(name);
@@ -365,6 +364,7 @@ public final class Analyser {
             // 标识符是常量
             throw new AnalyzeError(ErrorCode.AssignToConstant, /* 当前位置 */ nameToken.getStartPos());
         }
+        expect(TokenType.Equal);
         // 设置符号已初始化
         analyseExpression();
         expect(TokenType.Semicolon);
