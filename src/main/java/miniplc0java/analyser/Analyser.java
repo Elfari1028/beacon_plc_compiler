@@ -284,7 +284,7 @@ public final class Analyser {
         // 语句序列 -> 语句*
         // 语句 -> 赋值语句 | 输出语句 | 空语句
 
-        while (true) {
+        while (check(TokenType.Ident)||check(TokenType.Print)||check(TokenType.Semicolon)) {
             // 如果下一个 token 是……
             var peeked = peek();
             if (peeked.getTokenType() == TokenType.Ident) {
