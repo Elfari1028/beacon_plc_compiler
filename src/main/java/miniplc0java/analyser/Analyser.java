@@ -237,7 +237,7 @@ public final class Analyser {
             // 这里把常量值直接放进栈里，位置和符号表记录的一样。
             // 更高级的程序还可以把常量的值记录下来，遇到相应的变量直接替换成这个常数值，
             // 我们这里就先不这么干了。
-//            instructions.add(new Instruction(Operation.LIT, value));
+            instructions.add(new Instruction(Operation.LIT, value));
         }
     }
 
@@ -257,12 +257,12 @@ public final class Analyser {
             // ['='<表达式>]
             if (nextIf(TokenType.Equal) != null) {
                 initialized = true;
-            }
-            else{
-                initialized = false;
+                analyseExpression();
             }
             // 分析初始化的表达式
 
+            // 分号
+            expect(TokenType.Semicolon);
 
             // 加入符号表，请填写名字和当前位置（报错用）
             String name = /* 名字 */ nameToken.getValueString();
@@ -271,12 +271,7 @@ public final class Analyser {
             // 如果没有初始化的话在栈里推入一个初始值
             if (!initialized) {
                 instructions.add(new Instruction(Operation.LIT, 0));
-            }else {
-                analyseExpression();
             }
-
-            // 分号
-            expect(TokenType.Semicolon);
         }
     }
 
@@ -284,7 +279,7 @@ public final class Analyser {
         // 语句序列 -> 语句*
         // 语句 -> 赋值语句 | 输出语句 | 空语句
 
-        while (check(TokenType.Ident)||check(TokenType.Print)||check(TokenType.Semicolon)) {
+        while (true){
             // 如果下一个 token 是……
             var peeked = peek();
             if (peeked.getTokenType() == TokenType.Ident) {
@@ -371,9 +366,9 @@ public final class Analyser {
             throw new AnalyzeError(ErrorCode.AssignToConstant, /* 当前位置 */ nameToken.getStartPos());
         }
         // 设置符号已初始化
-        initializeSymbol(name, nameToken.getStartPos());
         analyseExpression();
         expect(TokenType.Semicolon);
+        initializeSymbol(name, nameToken.getStartPos());
         // 把结果保存
         var offset = getOffset(name, nameToken.getStartPos());
         instructions.add(new Instruction(Operation.STO, offset));
